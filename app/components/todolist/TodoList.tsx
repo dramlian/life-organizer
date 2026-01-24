@@ -7,9 +7,8 @@ import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
 import { Col, Container, Row } from "react-bootstrap";
 
-export default function TodoList({ injectedTodos }: { injectedTodos: Todo[] }) {
+export default function TodoList({ injectedTodos, setTodos }: { injectedTodos: Todo[], setTodos: React.Dispatch<React.SetStateAction<Todo[]>> }) {
 
-    const [todos, setTodos] = useState<Todo[]>([]);
     const [inputTextValue, setInputTextValue] = useState<string>("");
 
     useEffect(() => {
@@ -17,20 +16,20 @@ export default function TodoList({ injectedTodos }: { injectedTodos: Todo[] }) {
     }, [injectedTodos]);
 
     function deleteTodo(id: number) {
-        setTodos(todos.filter(todo => todo.id !== id));
+        setTodos(injectedTodos.filter(todo => todo.id !== id));
     }
 
     function addTodo(content: string) {
         const newTodo: Todo = {
-            id: todos.length + 1,
+            id: injectedTodos.length + 1,
             content,
             done: false,
         };
-        setTodos([...todos, newTodo]);
+        setTodos([...injectedTodos, newTodo]);
     }
 
     function markTodo(id: number) {
-        setTodos(todos.map(todo => {
+        setTodos(injectedTodos.map(todo => {
             if (todo.id === id) {
 
                 if (todo.done) {
@@ -66,7 +65,7 @@ export default function TodoList({ injectedTodos }: { injectedTodos: Todo[] }) {
             <Row>
                 <Col>
                     <ul style={{ padding: 0, listStyle: 'none' }}>
-                        {todos.map((todo) => (
+                        {injectedTodos.map((todo) => (
                             <li key={todo.id}>
                                 <InputGroup className="mb-3">
                                     <InputGroup.Checkbox aria-label="Checkbox for following text input" checked={todo.done} onChange={(e) => markTodo(todo.id)} />
