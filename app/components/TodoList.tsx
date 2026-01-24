@@ -1,26 +1,16 @@
 'use client';
 
 import { useState, useEffect } from "react";
+import { Todo } from "../interfaces/Todo"
 
-export default function TodoList() {
-
-    interface Todo {
-        id: number;
-        content: string;
-        done: boolean;
-    }
+export default function TodoList({ injectedTodos }: { injectedTodos: Todo[] }) {
 
     const [todos, setTodos] = useState<Todo[]>([]);
     const [inputTextValue, setInputTextValue] = useState<string>("");
 
     useEffect(() => {
-        const initialTodos: Todo[] = [
-            { id: 1, content: "First task", done: false },
-            { id: 2, content: "Second task", done: true },
-            { id: 3, content: "Third task", done: false },
-        ];
-        setTodos(initialTodos);
-    }, []);
+        setTodos(injectedTodos);
+    }, [injectedTodos]);
 
     function deleteTodo(id: number) {
         setTodos(todos.filter(todo => todo.id !== id));
