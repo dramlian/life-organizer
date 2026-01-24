@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
-import TodoList from "../components/TodoList";
+import TodoList from "../components/todolist/TodoList";
 import { Todo } from "../interfaces/Todo";
 
 export default function Tasks() {

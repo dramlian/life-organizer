@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { Todo } from "../interfaces/Todo"
+import { Todo } from "../../interfaces/Todo"
 
 export default function TodoList({ injectedTodos }: { injectedTodos: Todo[] }) {
 
