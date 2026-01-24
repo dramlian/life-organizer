@@ -8,9 +8,9 @@ export default function NavbarClient() {
         <Navbar bg="dark" data-bs-theme="dark">
             <Container>
                 <Nav className="mx-auto">
-                    <Nav.Link>Home</Nav.Link>
-                    <Nav.Link>Features</Nav.Link>
-                    <Nav.Link>Pricing</Nav.Link>
+                    <Nav.Link>Tasks</Nav.Link>
+                    <Nav.Link>Work reports</Nav.Link>
+                    <Nav.Link>Workouts</Nav.Link>
                 </Nav>
             </Container>
         </Navbar>
