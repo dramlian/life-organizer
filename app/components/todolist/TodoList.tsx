@@ -49,6 +49,7 @@ export default function TodoList({ injectedTodos }: { injectedTodos: Todo[] }) {
             <Row className="mt-3">
                 <Col>
                     <InputGroup className="mb-3">
+                        <InputGroup.Checkbox aria-label="Placeholder checkbox" style={{ visibility: 'hidden' }} disabled />
                         <Form.Control
                             placeholder="Recipient's username"
                             aria-label="Recipient's username"
@@ -64,7 +65,7 @@ export default function TodoList({ injectedTodos }: { injectedTodos: Todo[] }) {
             </Row>
             <Row>
                 <Col>
-                    <ul>
+                    <ul style={{ padding: 0, listStyle: 'none' }}>
                         {todos.map((todo) => (
                             <li key={todo.id}>
                                 <InputGroup className="mb-3">
