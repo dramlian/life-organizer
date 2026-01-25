@@ -5,24 +5,26 @@ import TodoList from "../components/todolist/TodoList";
 import { Todo } from "../interfaces/Todo";
 import DaySelector from "../components/dayselector/DaySelector";
 import { useEffect, useState } from "react";
+import { getTasksByDate } from "../actions/tasks";
 
 export default function Tasks() {
     const today = new Date().toISOString().split('T')[0];
     const [selectedDate, setSelectedDate] = useState<string>(today);
-
-    const initialTodos: Todo[] = [
-        { id: 1, content: "First task", done: false },
-        { id: 2, content: "Second task", done: true },
-        { id: 3, content: "Third task", done: false },
-    ];
-
-    const [todos, setTodos] = useState<Todo[]>(initialTodos);
+    const [todos, setTodos] = useState<Todo[]>([]);
 
     useEffect(() => {
-        // This effect could be used to fetch todos for the selected date
-        alert(todos);
-    }, [todos]);
+        const fetchTasks = async () => {
+            const todos = await getTasksByDate(selectedDate);
+            setTodos(todos);
+        };
 
+        fetchTasks();
+    }, [selectedDate]);
+
+
+    useEffect(() => {
+
+    }, []);
 
     return (
         <Container fluid className="h-100 p-0">

@@ -3,3 +3,8 @@ export interface Todo {
     content: string;
     done: boolean;
 }
+
+export interface TodoDbDto {
+    _id: string;
+    tasks: Todo[];
+}
