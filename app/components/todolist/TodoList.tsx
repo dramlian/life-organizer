@@ -84,7 +84,7 @@ export default function TodoList({ injectedTodos, setTodos }: { injectedTodos: T
                                 <InputGroup className="mb-3">
                                     <InputGroup.Checkbox aria-label="Checkbox for following text input" checked={todo.done} onChange={(e) => markTodo(todo.id)} />
 
-                                    <Form.Control aria-label="Text input with checkbox" readOnly={false} value={todo.content} onChange={(e) => editTodo(todo.id, e.target.value)} />
+                                    <Form.Control aria-label="Text input with checkbox" readOnly={todo.done} value={todo.content} onChange={(e) => editTodo(todo.id, e.target.value)} style={todo.done ? { textDecoration: 'line-through' } : {}} />
                                     <Button variant="outline-primary" onClick={() => deleteTodo(todo.id)}>Delete</Button>
                                 </InputGroup>
                             </li>
