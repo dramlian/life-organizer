@@ -5,7 +5,7 @@ import TodoList from "../components/todolist/TodoList";
 import { Todo } from "../interfaces/Todo";
 import DaySelector from "../components/dayselector/DaySelector";
 import { useEffect, useState } from "react";
-import { getTasksByDate, updateTasksForDate } from "../actions/tasks";
+import { getTasksByDate, updateTasksForDate, createDefaultTasksForDate } from "../actions/tasks";
 
 export default function Tasks() {
     const today = new Date().toISOString().split('T')[0];
@@ -15,6 +15,12 @@ export default function Tasks() {
     useEffect(() => {
         const fetchTasks = async () => {
             const todos = await getTasksByDate(selectedDate);
+            if (todos.length === 0) {
+                await createDefaultTasksForDate(selectedDate);
+                const defaultTodos = await getTasksByDate(selectedDate);
+                setTodos(defaultTodos);
+                return;
+            }
             setTodos(todos);
         };
 
