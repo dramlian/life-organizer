@@ -74,7 +74,11 @@ export default function TodoList({ injectedTodos, setTodos }: { injectedTodos: T
             <Row>
                 <Col>
                     <ul style={{ padding: 0, listStyle: 'none' }}>
-                        {injectedTodos.map((todo) => (
+                        {[...injectedTodos].sort((a, b) => {
+                            if (a.done && !b.done) return -1;
+                            if (!a.done && b.done) return 1;
+                            return 0;
+                        }).map((todo) => (
                             <li key={todo.id}>
                                 <InputGroup className="mb-3">
                                     <InputGroup.Checkbox aria-label="Checkbox for following text input" checked={todo.done} onChange={(e) => markTodo(todo.id)} />
