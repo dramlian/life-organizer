@@ -43,6 +43,15 @@ export default function TodoList({ injectedTodos, setTodos }: { injectedTodos: T
         }));
     }
 
+    function editTodo(id: number, content: string) {
+        setTodos(injectedTodos.map(todo => {
+            if (todo.id === id) {
+                return { ...todo, content };
+            }
+            return todo;
+        }));
+    }
+
     return (
         <Container>
             <Row className="mt-3">
@@ -70,7 +79,7 @@ export default function TodoList({ injectedTodos, setTodos }: { injectedTodos: T
                                 <InputGroup className="mb-3">
                                     <InputGroup.Checkbox aria-label="Checkbox for following text input" checked={todo.done} onChange={(e) => markTodo(todo.id)} />
 
-                                    <Form.Control aria-label="Text input with checkbox" readOnly={true} value={todo.content} onChange={(e) => { }} />
+                                    <Form.Control aria-label="Text input with checkbox" readOnly={false} value={todo.content} onChange={(e) => editTodo(todo.id, e.target.value)} />
                                     <Button variant="outline-primary" onClick={() => deleteTodo(todo.id)}>Delete</Button>
                                 </InputGroup>
                             </li>
