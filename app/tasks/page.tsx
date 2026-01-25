@@ -5,7 +5,7 @@ import TodoList from "../components/todolist/TodoList";
 import { Todo } from "../interfaces/Todo";
 import DaySelector from "../components/dayselector/DaySelector";
 import { useEffect, useState } from "react";
-import { getTasksByDate } from "../actions/tasks";
+import { getTasksByDate, updateTasksForDate } from "../actions/tasks";
 
 export default function Tasks() {
     const today = new Date().toISOString().split('T')[0];
@@ -23,8 +23,9 @@ export default function Tasks() {
 
 
     useEffect(() => {
-
-    }, []);
+        if (todos.length === 0) return;
+        updateTasksForDate(selectedDate, todos);
+    }, [todos]);
 
     return (
         <Container fluid className="h-100 p-0">
