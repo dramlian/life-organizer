@@ -29,7 +29,6 @@ export default function Tasks() {
 
 
     useEffect(() => {
-        if (todos.length === 0) return;
         updateTasksForDate(selectedDate, todos);
     }, [todos]);
 

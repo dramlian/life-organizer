@@ -39,6 +39,15 @@ export async function createDefaultTasksForDate(date: string): Promise<void> {
         { id: 2, content: "Sample Task 2", done: false },
     ];
 
+    if ((await getTasksByDate(date)).length > 0) return;
+
+
+    if (await db
+        .collection<TodoDbDto>("tasks")
+        .findOne({ _id: date })) {
+        return await updateTasksForDate(date, defaultTasks);
+    }
+
     await db
         .collection<TodoDbDto>("tasks")
         .insertOne({ _id: date, tasks: defaultTasks });
