@@ -2,6 +2,7 @@
 
 import { TodoDbDto, Todo } from "../interfaces/Todo";
 import { getDb } from "../lib/mongo";
+import defaultTasks from "../lib/constants";
 
 
 export async function getTasksByDate(date: string): Promise<Todo[]> {
@@ -34,18 +35,12 @@ export async function createDefaultTasksForDate(date: string): Promise<void> {
 
     const db = await getDb();
 
-    const defaultTasks: Todo[] = [
-        { id: 1, content: "Sample Task 1", done: false },
-        { id: 2, content: "Sample Task 2", done: false },
-    ];
-
     if ((await getTasksByDate(date)).length > 0) return;
-
 
     if (await db
         .collection<TodoDbDto>("tasks")
         .findOne({ _id: date })) {
-        return await updateTasksForDate(date, defaultTasks);
+        return;
     }
 
     await db
