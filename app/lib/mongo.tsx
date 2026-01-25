@@ -1,6 +1,6 @@
 import { MongoClient, Db } from "mongodb";
 
-const uri = "mongodb://admin:adminpassword@localhost:27017/?authSource=admin";
+const uri: string = process.env.MONGODB_URI!;
 
 let client: MongoClient;
 let db: Db;
