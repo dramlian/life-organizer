@@ -76,8 +76,8 @@ export default function TodoList({ injectedTodos, setTodos }: { injectedTodos: T
                 <Col>
                     <ul style={{ padding: 0, listStyle: 'none' }}>
                         {[...injectedTodos].sort((a, b) => {
-                            if (a.done && !b.done) return -1;
-                            if (!a.done && b.done) return 1;
+                            if (a.done && !b.done) return 1;
+                            if (!a.done && b.done) return -1;
                             return 0;
                         }).map((todo) => (
                             <li key={todo.id}>
