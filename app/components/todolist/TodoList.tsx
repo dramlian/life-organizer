@@ -26,6 +26,7 @@ export default function TodoList({ injectedTodos, setTodos }: { injectedTodos: T
             done: false,
         };
         setTodos([...injectedTodos, newTodo]);
+        setInputTextValue("");
     }
 
     function markTodo(id: number) {
