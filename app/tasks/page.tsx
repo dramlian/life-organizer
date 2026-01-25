@@ -33,14 +33,14 @@ export default function Tasks() {
     }, [todos]);
 
     return (
-        <Container fluid className="h-100 p-0">
-            <Row >
-                <Col md={12} >
+        <Container fluid className="h-100 p-0" style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
+            <Row className="g-0">
+                <Col md={12}>
                     <DaySelector selectedDate={selectedDate} onDateChange={setSelectedDate} />
                 </Col>
             </Row>
-            <Row >
-                <Col md={12} >
+            <Row className="g-0">
+                <Col md={12}>
                     <TodoList injectedTodos={todos} setTodos={setTodos} />
                 </Col>
             </Row>
