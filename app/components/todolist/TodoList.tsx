@@ -7,7 +7,7 @@ import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
 import { Col, Container, Row } from "react-bootstrap";
 
-export default function TodoList({ injectedTodos, setTodos }: { injectedTodos: Todo[], setTodos: React.Dispatch<React.SetStateAction<Todo[]>> }) {
+export default function TodoList({ injectedTodos, setTodos }: { injectedTodos: Todo[] | null, setTodos: React.Dispatch<React.SetStateAction<Todo[] | null>> }) {
 
     const [inputTextValue, setInputTextValue] = useState<string>("");
 
@@ -16,10 +16,12 @@ export default function TodoList({ injectedTodos, setTodos }: { injectedTodos: T
     }, [injectedTodos]);
 
     function deleteTodo(id: number) {
+        if (injectedTodos === null) return;
         setTodos(injectedTodos.filter(todo => todo.id !== id));
     }
 
     function addTodo(content: string) {
+        if (injectedTodos === null) return;
         const newTodo: Todo = {
             id: injectedTodos.length + 1,
             content,
@@ -30,6 +32,7 @@ export default function TodoList({ injectedTodos, setTodos }: { injectedTodos: T
     }
 
     function markTodo(id: number) {
+        if (injectedTodos === null) return;
         setTodos(injectedTodos.map(todo => {
             if (todo.id === id) {
 
@@ -45,6 +48,7 @@ export default function TodoList({ injectedTodos, setTodos }: { injectedTodos: T
     }
 
     function editTodo(id: number, content: string) {
+        if (injectedTodos === null) return;
         setTodos(injectedTodos.map(todo => {
             if (todo.id === id) {
                 return { ...todo, content };
@@ -75,7 +79,7 @@ export default function TodoList({ injectedTodos, setTodos }: { injectedTodos: T
             <Row>
                 <Col>
                     <ul style={{ padding: 0, listStyle: 'none' }}>
-                        {[...injectedTodos].sort((a, b) => {
+                        {injectedTodos !== null && [...injectedTodos].sort((a, b) => {
                             if (a.done && !b.done) return 1;
                             if (!a.done && b.done) return -1;
                             return 0;

@@ -2,7 +2,7 @@
 
 import { TodoDbDto, Todo } from "../interfaces/Todo";
 import { getDb } from "../lib/mongo";
-import defaultTasks from "../lib/constants";
+import { defaultTasks } from "../lib/constants";
 
 
 export async function getTasksByDate(date: string): Promise<Todo[]> {

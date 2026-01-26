@@ -8,4 +8,6 @@ const defaultTasks: Todo[] = [
     { id: 5, content: "Cvicit/Pohyb", done: false },
 ];
 
-export default defaultTasks;
+const sampleReport: string = `<h3>Yesterday's Catch Up</h3><p>- </p><h3>Todo for Today</h3><p>- </p>`;
+
+export { defaultTasks, sampleReport };

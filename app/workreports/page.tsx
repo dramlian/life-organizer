@@ -1,39 +1,38 @@
 'use client';
 
 import { Container, Row, Col } from "react-bootstrap";
-import TodoList from "../components/todolist/TodoList";
-import { Todo } from "../interfaces/Todo";
 import DaySelector from "../components/dayselector/DaySelector";
 import { useEffect, useState } from "react";
-import { getTasksByDate, updateTasksForDate, createDefaultTasksForDate } from "../actions/tasks";
+import RichTextEditor from "../components/richtexteditor/RichTextEditor";
+import { getReportByDate, updateReportForDate, createDefaultReportForDate } from "../actions/reports";
 
-export default function Tasks() {
+export default function WorkReports() {
     const today = new Date().toISOString().split('T')[0];
     const [selectedDate, setSelectedDate] = useState<string>(today);
-    const [todos, setTodos] = useState<Todo[] | null>(null);
+    const [html, setHtml] = useState<string>("");
+
 
     useEffect(() => {
-        const fetchTasks = async () => {
-            const todos = await getTasksByDate(selectedDate);
-            if (todos.length === 0) {
-                await createDefaultTasksForDate(selectedDate);
-                const defaultTodos = await getTasksByDate(selectedDate);
-                setTodos(defaultTodos);
+        const fetchReport = async () => {
+            const report = await getReportByDate(selectedDate);
+            if (report === null) {
+                await createDefaultReportForDate(selectedDate);
+                const defaultReport = await getReportByDate(selectedDate);
+                setHtml(defaultReport ?? `<h2>Work Report for ${selectedDate}</h2><p>No report available.</p>`);
                 return;
             } else {
-                setTodos(todos);
+                setHtml(report);
             }
         };
+        fetchReport();
 
-        fetchTasks();
     }, [selectedDate]);
 
 
     useEffect(() => {
-        if (todos !== null) {
-            updateTasksForDate(selectedDate, todos);
-        }
-    }, [todos]);
+        if (html === "") return;
+        updateReportForDate(selectedDate, html);
+    }, [html]);
 
     return (
         <Container fluid className="h-100 p-0" style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
@@ -44,7 +43,7 @@ export default function Tasks() {
             </Row>
             <Row className="g-0">
                 <Col md={12}>
-                    <TodoList injectedTodos={todos} setTodos={setTodos} />
+                    <RichTextEditor initialHtml={html} onChange={setHtml} />
                 </Col>
             </Row>
         </Container>
