@@ -23,6 +23,15 @@ export default function Workouts() {
         setWorkouts([...workouts, { _id: id, content: "" }]);
     }
 
+    function manageDeleteWorkout(id: string) {
+        deleteWorkout(id);
+        const updatedWorkouts = workouts.filter(w => w._id !== id);
+        setWorkouts(updatedWorkouts);
+        if (selectedWorkout?._id === id) {
+            setSelectedWorkout(updatedWorkouts[0] || null);
+        }
+    }
+
     useEffect(() => {
         const fetchWorkouts = async () => {
             const initialWorkouts = await getWorkouts();
@@ -61,13 +70,14 @@ export default function Workouts() {
                         workouts={workouts}
                         setSelectedWorkout={setSelectedWorkout}
                         selectedWorkout={selectedWorkout}
+                        deleteWorkout={manageDeleteWorkout}
                     />
                 </Col>
                 <Col className="pt-3 border rounded " style={{ height: '80vh', overflowY: 'scroll' }} >
-                    <Row>
+                    <Row className="justify-content-center">
                         <Stopwatch />
                     </Row>
-                    <Row>
+                    <Row className="justify-content-center">
                         <RichTextEditor initialHtml={html} onChange={setHtml} />
                     </Row>
                 </Col>

@@ -10,6 +10,7 @@ export default function WorkoutSelector({
     workouts,
     setSelectedWorkout,
     selectedWorkout,
+    deleteWorkout
 }: {
     inputTextValue: string;
     setInputTextValue: (value: string) => void;
@@ -17,6 +18,7 @@ export default function WorkoutSelector({
     workouts: WorkoutDbDto[];
     setSelectedWorkout: (workout: WorkoutDbDto | null) => void;
     selectedWorkout: WorkoutDbDto | null;
+    deleteWorkout: (id: string) => void;
 }) {
     return (
         <Row>
@@ -33,9 +35,10 @@ export default function WorkoutSelector({
                 >
                     Add Workout
                 </Button>
+
             </InputGroup>
 
-            <ListGroup>
+            <ListGroup className="px-2">
                 {workouts.map((workout, index) => (
                     <ListGroup.Item
                         key={index}
@@ -49,6 +52,21 @@ export default function WorkoutSelector({
                     </ListGroup.Item>
                 ))}
             </ListGroup>
+
+            <div className="px-2 mt-3">
+                <Button
+                    variant="outline-danger"
+                    className="w-100 fw-bold shadow-sm"
+                    onClick={() => {
+                        if (selectedWorkout) {
+                            deleteWorkout(selectedWorkout._id);
+                        }
+                    }}
+                >
+                    Delete Workout
+                </Button>
+            </div>
+
         </Row>
     );
 }
