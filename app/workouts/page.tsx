@@ -1,49 +1,67 @@
 'use client';
 
-import { useState } from "react";
-import { Col, Row, Container, ListGroup, InputGroup, Button, Form } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Col, Row, Container } from "react-bootstrap";
 import RichTextEditor from "../components/richtexteditor/RichTextEditor";
 import Stopwatch from "../components/stopwatch/Stopwatch";
+import WorkoutSelector from "../components/workoutselector/WorkoutSelector";
+import { getWorkouts, updateWorkout, addWorkout, deleteWorkout } from "../actions/workouts";
+import { WorkoutDbDto } from "../interfaces/Workouts";
+
 
 export default function Workouts() {
 
     const [inputTextValue, setInputTextValue] = useState<string>("");
     const [html, setHtml] = useState<string>("");
+    const [workouts, setWorkouts] = useState<WorkoutDbDto[]>([]);
+    const [selectedWorkout, setSelectedWorkout] = useState<WorkoutDbDto | null>(null);
 
-    function addWorkout(content: string) {
-        // Placeholder function for adding a workout
-        console.log("Adding workout:", content);
-        setInputTextValue(content);
+    function manageAddWorkout(id: string) {
+        if (!id.trim() || workouts.map(w => w._id).includes(id)) return;
+        setInputTextValue("");
+        addWorkout("", id);
+        setWorkouts([...workouts, { _id: id, content: "" }]);
     }
+
+    useEffect(() => {
+        const fetchWorkouts = async () => {
+            const initialWorkouts = await getWorkouts();
+            setWorkouts(initialWorkouts);
+            setSelectedWorkout(initialWorkouts[0] || null);
+        };
+        fetchWorkouts();
+    }, []);
+
+    useEffect(() => {
+        if (selectedWorkout) {
+            setHtml(selectedWorkout.content);
+        }
+    }, [selectedWorkout]);
+
+
+    useEffect(() => {
+        if (selectedWorkout) {
+            updateWorkout(selectedWorkout._id, html);
+            const updatedWorkouts = workouts.map(w =>
+                w._id === selectedWorkout._id ? { ...w, content: html } : w
+            );
+            setWorkouts(updatedWorkouts);
+        }
+
+    }, [html]);
 
     return (
         <Container>
             <Row className="mt-3 gap-3">
                 <Col md={3} className="pt-3 border rounded " style={{ height: '80vh' }} >
-                    <InputGroup className="mb-3">
-                        <InputGroup.Checkbox aria-label="Placeholder checkbox" style={{ visibility: 'hidden' }} disabled />
-                        <Form.Control
-                            placeholder="Workout name"
-                            aria-label="Workout name"
-                            aria-describedby="basic-addon2"
-                            value={inputTextValue}
-                            onChange={(e) => setInputTextValue(e.target.value)}
-                        />
-                        <Button variant="outline-secondary" id="button-addon2" onClick={() => addWorkout(inputTextValue)}>
-                            Add Workout
-                        </Button>
-                    </InputGroup>
-                    <ListGroup>
-                        <ListGroup.Item  >
-                            Link 1
-                        </ListGroup.Item>
-                        <ListGroup.Item>
-                            Link 2
-                        </ListGroup.Item>
-                        <ListGroup.Item>
-                            This one is a button
-                        </ListGroup.Item>
-                    </ListGroup>
+                    <WorkoutSelector
+                        inputTextValue={inputTextValue}
+                        setInputTextValue={setInputTextValue}
+                        addWorkout={manageAddWorkout}
+                        workouts={workouts}
+                        setSelectedWorkout={setSelectedWorkout}
+                        selectedWorkout={selectedWorkout}
+                    />
                 </Col>
                 <Col className="pt-3 border rounded " style={{ height: '80vh', overflowY: 'scroll' }} >
                     <Row>
