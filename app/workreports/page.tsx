@@ -37,18 +37,18 @@ export default function WorkReports() {
 
     return (
         <Container fluid className="h-100 p-0" style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
-            <Row className="g-0">
+            <Row >
                 <Col md={12}>
                     <DaySelector selectedDate={selectedDate} onDateChange={setSelectedDate} />
                 </Col>
             </Row>
-            <Row className="g-0">
-                <Col md={12}>
-                    <RichTextEditor initialHtml={html} onChange={setHtml} />
+            <Row>
+                <Col md={12} >
+                    <RichTextEditor initialHtml={html} onChange={setHtml} hasBorder={true} />
                 </Col>
             </Row>
             <Row>
-                <Col>
+                <Col md={12}>
                     <Pomodoro />
                 </Col>
             </Row>
