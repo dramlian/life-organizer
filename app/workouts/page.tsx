@@ -62,7 +62,7 @@ export default function Workouts() {
     return (
         <Container>
             <Row className="mt-3 gap-3">
-                <Col md={3} className="pt-3 border rounded " style={{ height: '80vh' }} >
+                <Col md={3} className="pt-3 border rounded ">
                     <WorkoutSelector
                         inputTextValue={inputTextValue}
                         setInputTextValue={setInputTextValue}
