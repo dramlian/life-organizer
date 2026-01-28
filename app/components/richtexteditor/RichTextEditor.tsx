@@ -4,7 +4,6 @@ import { Container, Col, Row } from "react-bootstrap";
 import dynamic from "next/dynamic";
 import "suneditor/dist/css/suneditor.min.css";
 
-
 const SunEditor = dynamic(() => import("suneditor-react"), { ssr: false });
 
 interface RichTextEditorProps {
@@ -34,7 +33,7 @@ export default function RichTextEditor({ initialHtml = "", onChange }: RichTextE
                                 ["fontColor", "hiliteColor"],
                                 ["list", "align", "lineHeight"],
                                 ["link", "image", "video"],
-                                ["fullScreen", "codeView", "preview", "print"],
+                                ["fullScreen"],
                             ],
                         }}
                     />
