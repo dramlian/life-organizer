@@ -7,7 +7,7 @@ import Stopwatch from "../components/stopwatch/Stopwatch";
 import WorkoutSelector from "../components/workoutselector/WorkoutSelector";
 import { getWorkouts, updateWorkout, addWorkout, deleteWorkout } from "../actions/workouts";
 import { WorkoutDbDto } from "../interfaces/workouts";
-
+import Pomodoro from "../components/pomodoro/Pomodoro";
 
 export default function Workouts() {
 

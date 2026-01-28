@@ -5,6 +5,7 @@ import DaySelector from "../components/dayselector/DaySelector";
 import { useEffect, useState } from "react";
 import RichTextEditor from "../components/richtexteditor/RichTextEditor";
 import { getReportByDate, updateReportForDate, createDefaultReportForDate } from "../actions/reports";
+import Pomodoro from "../components/pomodoro/Pomodoro";
 
 export default function WorkReports() {
     const today = new Date().toISOString().split('T')[0];
@@ -44,6 +45,11 @@ export default function WorkReports() {
             <Row className="g-0">
                 <Col md={12}>
                     <RichTextEditor initialHtml={html} onChange={setHtml} />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Pomodoro />
                 </Col>
             </Row>
         </Container>
