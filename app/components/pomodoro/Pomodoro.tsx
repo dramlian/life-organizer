@@ -1,29 +1,24 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useStopwatch } from 'react-timer-hook';
 import { Button, Row, Col, Container } from 'react-bootstrap';
 
 export default function Pomodoro() {
-    const {
-        seconds,
-        minutes,
-        hours,
-        isRunning,
-        start,
-        pause,
-        reset,
-    } = useStopwatch({ autoStart: false });
-
-    const [milliseconds, setMilliseconds] = useState(0);
+    const [timeLeft, setTimeLeft] = useState(25 * 60); // 25 minutes in seconds
+    const [isRunning, setIsRunning] = useState(false);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
-        if (isRunning) {
-            const startTime = Date.now() - milliseconds;
+        if (isRunning && timeLeft > 0) {
             intervalRef.current = setInterval(() => {
-                setMilliseconds(Date.now() - startTime);
-            }, 10);
+                setTimeLeft((prev) => {
+                    if (prev <= 1) {
+                        setIsRunning(false);
+                        return 0;
+                    }
+                    return prev - 1;
+                });
+            }, 1000);
         } else {
             if (intervalRef.current) {
                 clearInterval(intervalRef.current);
@@ -35,35 +30,30 @@ export default function Pomodoro() {
                 clearInterval(intervalRef.current);
             }
         };
-    }, [isRunning]);
+    }, [isRunning, timeLeft]);
 
+    const handleStart = () => setIsRunning(true);
+    const handlePause = () => setIsRunning(false);
     const handleReset = () => {
-        if (intervalRef.current) {
-            clearInterval(intervalRef.current);
-            intervalRef.current = null;
-        }
-        setMilliseconds(0);
-        reset(undefined, false);
+        setIsRunning(false);
+        setTimeLeft(25 * 60);
     };
 
-    const ms = Math.floor((milliseconds % 1000) / 10);
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
 
     return (
         <Container>
             <Row>
                 <Col className='text-center m-3 border rounded p-3'>
                     <div className="display-1 mb-4 font-monospace">
-                        <span>{String(hours).padStart(2, '0')}</span>:
                         <span>{String(minutes).padStart(2, '0')}</span>:
                         <span>{String(seconds).padStart(2, '0')}</span>
-                        <span className="text-muted" style={{ fontSize: '0.6em' }}>
-                            .{String(ms).padStart(2, '0')}
-                        </span>
                     </div>
                     <div className="d-flex gap-2 justify-content-center">
                         <Button
                             variant={isRunning ? 'outline-warning' : 'outline-success'}
-                            onClick={isRunning ? pause : start}
+                            onClick={isRunning ? handlePause : handleStart}
                             size="lg"
                         >
                             {isRunning ? 'Pause' : 'Start'}
