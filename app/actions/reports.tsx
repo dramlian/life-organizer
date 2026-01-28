@@ -1,13 +1,12 @@
 "use server";
 
-import { ReportDbDto } from "../interfaces/Report";
+import { ReportDbDto } from "../interfaces/report";
 import { getDb } from "../lib/mongo";
 import { sampleReport } from "../lib/constants";
 
 export async function getReportByDate(date: string): Promise<string | null> {
 
     const db = await getDb();
-
     const report = await db
         .collection<ReportDbDto>("reports")
         .findOne({ _id: date });
@@ -18,7 +17,6 @@ export async function getReportByDate(date: string): Promise<string | null> {
 export async function updateReportForDate(date: string, content: string): Promise<void> {
 
     const db = await getDb();
-
     await db
         .collection<ReportDbDto>("reports")
         .updateOne(
@@ -31,7 +29,6 @@ export async function updateReportForDate(date: string, content: string): Promis
 export async function createDefaultReportForDate(date: string): Promise<void> {
 
     const db = await getDb();
-
     if ((await getReportByDate(date)) !== null) return;
 
     if (await db

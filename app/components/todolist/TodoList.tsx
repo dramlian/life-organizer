@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { Todo } from "../../interfaces/Todo"
+import { Todo } from "../../interfaces/todo"
 import InputGroup from "react-bootstrap/esm/InputGroup";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";

@@ -1,7 +1,7 @@
 'use client';
 
 import { Row, ListGroup, InputGroup, Button, Form } from "react-bootstrap";
-import { WorkoutDbDto } from "../../interfaces/Workouts";
+import { WorkoutDbDto } from "../../interfaces/workouts";
 
 export default function WorkoutSelector({
     inputTextValue,
@@ -35,9 +35,7 @@ export default function WorkoutSelector({
                 >
                     Add Workout
                 </Button>
-
             </InputGroup>
-
             <ListGroup className="px-2">
                 {workouts.map((workout, index) => (
                     <ListGroup.Item
@@ -52,7 +50,6 @@ export default function WorkoutSelector({
                     </ListGroup.Item>
                 ))}
             </ListGroup>
-
             <div className="px-2 mt-3">
                 <Button
                     variant="outline-danger"
@@ -66,7 +63,6 @@ export default function WorkoutSelector({
                     Delete Workout
                 </Button>
             </div>
-
         </Row>
     );
 }

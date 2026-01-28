@@ -1,4 +1,4 @@
-import { Todo } from "../interfaces/Todo";
+import { Todo } from "../interfaces/todo";
 
 const defaultTasks: Todo[] = [
     { id: 1, content: "Tvarohy", done: false },

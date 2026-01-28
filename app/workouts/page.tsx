@@ -6,7 +6,7 @@ import RichTextEditor from "../components/richtexteditor/RichTextEditor";
 import Stopwatch from "../components/stopwatch/Stopwatch";
 import WorkoutSelector from "../components/workoutselector/WorkoutSelector";
 import { getWorkouts, updateWorkout, addWorkout, deleteWorkout } from "../actions/workouts";
-import { WorkoutDbDto } from "../interfaces/Workouts";
+import { WorkoutDbDto } from "../interfaces/workouts";
 
 
 export default function Workouts() {
@@ -82,8 +82,6 @@ export default function Workouts() {
                     </Row>
                 </Col>
             </Row>
-
-
         </Container >
     );
 }

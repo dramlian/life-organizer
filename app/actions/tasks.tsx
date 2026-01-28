@@ -1,6 +1,6 @@
 "use server";
 
-import { TodoDbDto, Todo } from "../interfaces/Todo";
+import { TodoDbDto, Todo } from "../interfaces/todo";
 import { getDb } from "../lib/mongo";
 import { defaultTasks } from "../lib/constants";
 
@@ -8,7 +8,6 @@ import { defaultTasks } from "../lib/constants";
 export async function getTasksByDate(date: string): Promise<Todo[]> {
 
     const db = await getDb();
-
     const day = await db
         .collection<TodoDbDto>("tasks")
         .findOne({ _id: date });
@@ -20,7 +19,6 @@ export async function getTasksByDate(date: string): Promise<Todo[]> {
 export async function updateTasksForDate(date: string, tasks: Todo[]): Promise<void> {
 
     const db = await getDb();
-
     await db
         .collection<TodoDbDto>("tasks")
         .updateOne(
@@ -34,7 +32,6 @@ export async function updateTasksForDate(date: string, tasks: Todo[]): Promise<v
 export async function createDefaultTasksForDate(date: string): Promise<void> {
 
     const db = await getDb();
-
     if ((await getTasksByDate(date)).length > 0) return;
 
     if (await db
