@@ -5,6 +5,7 @@ import DaySelector from "../components/dayselector/DaySelector";
 import { useEffect, useState } from "react";
 import RichTextEditor from "../components/richtexteditor/RichTextEditor";
 import { getReportByDate, updateReportForDate, createDefaultReportForDate } from "../actions/reports";
+import Pomodoro from "../components/pomodoro/Pomodoro";
 
 export default function WorkReports() {
     const today = new Date().toISOString().split('T')[0];
@@ -36,14 +37,19 @@ export default function WorkReports() {
 
     return (
         <Container fluid className="h-100 p-0" style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
-            <Row className="g-0">
+            <Row >
                 <Col md={12}>
                     <DaySelector selectedDate={selectedDate} onDateChange={setSelectedDate} />
                 </Col>
             </Row>
-            <Row className="g-0">
+            <Row>
+                <Col md={12} >
+                    <RichTextEditor initialHtml={html} onChange={setHtml} hasBorder={true} />
+                </Col>
+            </Row>
+            <Row>
                 <Col md={12}>
-                    <RichTextEditor initialHtml={html} onChange={setHtml} />
+                    <Pomodoro />
                 </Col>
             </Row>
         </Container>

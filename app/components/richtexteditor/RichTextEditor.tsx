@@ -9,16 +9,17 @@ const SunEditor = dynamic(() => import("suneditor-react"), { ssr: false });
 interface RichTextEditorProps {
     initialHtml?: string;
     onChange?: (html: string) => void;
+    hasBorder?: boolean;
 }
 
-export default function RichTextEditor({ initialHtml = "", onChange }: RichTextEditorProps) {
+export default function RichTextEditor({ initialHtml = "", onChange, hasBorder = false }: RichTextEditorProps) {
 
     const handleChange = (content: string) => {
         if (onChange) onChange(content);
     };
 
     return (
-        <Container>
+        <Container className={hasBorder ? "border rounded p-3" : ""}>
             <Row>
                 <Col>
                     <SunEditor
