@@ -2,7 +2,7 @@
 
 import { Container, Row, Col } from "react-bootstrap";
 import TodoList from "../components/todolist/TodoList";
-import { Todo } from "../interfaces/Todo";
+import { Todo } from "../interfaces/todo";
 import DaySelector from "../components/dayselector/DaySelector";
 import { useEffect, useState } from "react";
 import { getTasksByDate, updateTasksForDate, createDefaultTasksForDate } from "../actions/tasks";

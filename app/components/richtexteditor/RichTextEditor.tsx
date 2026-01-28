@@ -40,6 +40,5 @@ export default function RichTextEditor({ initialHtml = "", onChange }: RichTextE
                 </Col>
             </Row>
         </Container>
-
     );
 }
