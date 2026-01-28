@@ -1,11 +1,12 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Button, Row, Col, Container } from 'react-bootstrap';
+import { Button, Row, Col, Container, ButtonGroup } from 'react-bootstrap';
 
 export default function Pomodoro() {
     const [timeLeft, setTimeLeft] = useState(25 * 60); // 25 minutes in seconds
     const [isRunning, setIsRunning] = useState(false);
+    const [bgColor, setBgColor] = useState('danger');
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
@@ -42,10 +43,37 @@ export default function Pomodoro() {
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
 
+    function handleModeChange(mode: 'pomodoro' | 'shortBreak' | 'longBreak') {
+        setIsRunning(false);
+        switch (mode) {
+            case 'pomodoro':
+                setTimeLeft(25 * 60);
+                setBgColor('danger');
+                break;
+            case 'shortBreak':
+                setTimeLeft(5 * 60);
+                setBgColor('primary');
+                break;
+            case 'longBreak':
+                setTimeLeft(15 * 60);
+                setBgColor('info');
+                break;
+        }
+    }
+
     return (
-        <Container>
+        <Container className='border rounded p-3 mt-3 bg-light'>
+
+            <Row className="mt-3">
+                <ButtonGroup aria-label="Basic example">
+                    <Button variant="outline-danger" onClick={() => handleModeChange('pomodoro')}>Pomodoro</Button>
+                    <Button variant="outline-primary" onClick={() => handleModeChange('shortBreak')}>Short break</Button>
+                    <Button variant="outline-info" onClick={() => handleModeChange('longBreak')}>Long break</Button>
+                </ButtonGroup>
+            </Row>
+
             <Row>
-                <Col className='text-center m-3 border rounded p-3'>
+                <Col className={`text-center m-3 border rounded p-3 bg-${bgColor} bg-opacity-10`}>
                     <div className="display-1 mb-4 font-monospace">
                         <span>{String(minutes).padStart(2, '0')}</span>:
                         <span>{String(seconds).padStart(2, '0')}</span>
