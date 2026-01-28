@@ -62,7 +62,7 @@ export default function Pomodoro() {
     }
 
     return (
-        <Container className='border rounded p-3 mt-3 bg-light'>
+        <Container className={`border rounded p-3 mt-3 bg-${bgColor}  bg-opacity-10`}>
 
             <Row className="mt-3">
                 <ButtonGroup aria-label="Basic example">
