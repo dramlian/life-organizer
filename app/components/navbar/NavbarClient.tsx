@@ -11,12 +11,12 @@ export default function NavbarClient() {
     return (
         <Navbar bg="dark" variant="dark" expand="lg" className="shadow-sm">
             <Container>
-                <Navbar.Brand as={Link} href="/" className="fw-bold">
+                <Navbar.Brand as={Link} href="/" >
                     Life Organizer
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mx-auto d-flex justify-content-center flex-grow-1">
+                    <Nav className="mx-auto d-flex justify-content-start flex-grow-1">
                         <Nav.Link as={Link} href="/tasks" className="mx-2">
                             Tasks
                         </Nav.Link>
