@@ -2,9 +2,10 @@
 
 import { WorkoutDbDto } from "../interfaces/workouts";
 import { getDb } from "../lib/mongo";
-
+import { requireAuth } from "../lib/auth";
 
 export async function getWorkouts(): Promise<WorkoutDbDto[]> {
+    await requireAuth();
 
     const db = await getDb();
     return db
@@ -14,6 +15,7 @@ export async function getWorkouts(): Promise<WorkoutDbDto[]> {
 }
 
 export async function addWorkout(content: string, id: string): Promise<void> {
+    await requireAuth();
 
     const db = await getDb();
     await db
@@ -22,6 +24,7 @@ export async function addWorkout(content: string, id: string): Promise<void> {
 }
 
 export async function deleteWorkout(id: string): Promise<void> {
+    await requireAuth();
 
     const db = await getDb();
     await db
@@ -30,6 +33,7 @@ export async function deleteWorkout(id: string): Promise<void> {
 }
 
 export async function updateWorkout(id: string, content: string): Promise<void> {
+    await requireAuth();
 
     const db = await getDb();
     await db
