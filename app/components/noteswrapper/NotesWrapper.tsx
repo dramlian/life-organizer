@@ -12,48 +12,47 @@ export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?
 
     const [inputTextValue, setInputTextValue] = useState<string>("");
     const [html, setHtml] = useState<string>("");
-    const [workouts, setWorkouts] = useState<WorkoutDbDto[]>([]);
-    const [selectedWorkout, setSelectedWorkout] = useState<WorkoutDbDto | null>(null);
+    const [notes, setnotes] = useState<WorkoutDbDto[]>([]);
+    const [selectedNote, setSelectedNote] = useState<WorkoutDbDto | null>(null);
 
-    function manageAddWorkout(id: string) {
-        if (!id.trim() || workouts.map(w => w._id).includes(id)) return;
+    function manageAddNote(id: string) {
+        if (!id.trim() || notes.map(w => w._id).includes(id)) return;
         setInputTextValue("");
         addWorkout("", id);
-        setWorkouts([...workouts, { _id: id, content: "" }]);
+        setnotes([...notes, { _id: id, content: "" }]);
     }
 
-    function manageDeleteWorkout(id: string) {
+    function manageDeleteNote(id: string) {
         deleteWorkout(id);
-        const updatedWorkouts = workouts.filter(w => w._id !== id);
-        setWorkouts(updatedWorkouts);
-        if (selectedWorkout?._id === id) {
-            setSelectedWorkout(updatedWorkouts[0] || null);
+        const updatednotes = notes.filter(w => w._id !== id);
+        setnotes(updatednotes);
+        if (selectedNote?._id === id) {
+            setSelectedNote(updatednotes[0] || null);
         }
     }
 
     useEffect(() => {
-        const fetchWorkouts = async () => {
-            const initialWorkouts = await getWorkouts();
-            setWorkouts(initialWorkouts);
-            setSelectedWorkout(initialWorkouts[0] || null);
+        const fetchnotes = async () => {
+            const initialnotes = await getWorkouts();
+            setnotes(initialnotes);
+            setSelectedNote(initialnotes[0] || null);
         };
-        fetchWorkouts();
+        fetchnotes();
     }, []);
 
     useEffect(() => {
-        if (selectedWorkout) {
-            setHtml(selectedWorkout.content);
+        if (selectedNote) {
+            setHtml(selectedNote.content);
         }
-    }, [selectedWorkout]);
-
+    }, [selectedNote]);
 
     useEffect(() => {
-        if (selectedWorkout) {
-            updateWorkout(selectedWorkout._id, html);
-            const updatedWorkouts = workouts.map(w =>
-                w._id === selectedWorkout._id ? { ...w, content: html } : w
+        if (selectedNote) {
+            updateWorkout(selectedNote._id, html);
+            const updatednotes = notes.map(w =>
+                w._id === selectedNote._id ? { ...w, content: html } : w
             );
-            setWorkouts(updatedWorkouts);
+            setnotes(updatednotes);
         }
 
     }, [html]);
@@ -65,11 +64,11 @@ export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?
                     <WorkoutSelector
                         inputTextValue={inputTextValue}
                         setInputTextValue={setInputTextValue}
-                        addWorkout={manageAddWorkout}
-                        workouts={workouts}
-                        setSelectedWorkout={setSelectedWorkout}
-                        selectedWorkout={selectedWorkout}
-                        deleteWorkout={manageDeleteWorkout}
+                        addWorkout={manageAddNote}
+                        workouts={notes}
+                        setSelectedWorkout={setSelectedNote}
+                        selectedWorkout={selectedNote}
+                        deleteWorkout={manageDeleteNote}
                     />
                 </Col>
                 <Col className="pt-3 border rounded " style={{ height: '80vh', overflowY: 'scroll' }} >
