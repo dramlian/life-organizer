@@ -26,6 +26,9 @@ export default function NavbarClient() {
                         <Nav.Link as={Link} href="/workouts" className="mx-2">
                             Workouts
                         </Nav.Link>
+                        <Nav.Link as={Link} href="/notes" className="mx-2">
+                            Notes
+                        </Nav.Link>
                     </Nav>
                     <Nav className="align-items-center">
                         {status === "loading" ? (
