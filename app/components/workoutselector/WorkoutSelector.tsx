@@ -1,13 +1,13 @@
 'use client';
 
 import { Row, ListGroup, InputGroup, Button, Form } from "react-bootstrap";
-import { WorkoutDbDto } from "../../interfaces/workouts";
+import { NotesDbDto } from "../../interfaces/notes";
 
 export default function NoteSelector({
     inputTextValue,
     setInputTextValue,
     addNote,
-    workouts,
+    notes,
     setSelectedNote,
     selectedNote,
     deleteNote,
@@ -16,9 +16,9 @@ export default function NoteSelector({
     inputTextValue: string;
     setInputTextValue: (value: string) => void;
     addNote: (id: string) => void;
-    workouts: WorkoutDbDto[];
-    setSelectedNote: (workout: WorkoutDbDto | null) => void;
-    selectedNote: WorkoutDbDto | null;
+    notes: NotesDbDto[];
+    setSelectedNote: (note: NotesDbDto | null) => void;
+    selectedNote: NotesDbDto | null;
     deleteNote: (id: string) => void;
     isWorkout?: boolean;
 }) {
@@ -39,16 +39,16 @@ export default function NoteSelector({
                 </Button>
             </InputGroup>
             <ListGroup className="px-2">
-                {workouts.map((workout, index) => (
+                {notes.map((note, index) => (
                     <ListGroup.Item
                         key={index}
                         action
-                        active={selectedNote?._id === workout._id}
+                        active={selectedNote?._id === note._id}
                         onClick={() => {
-                            setSelectedNote(workout);
+                            setSelectedNote(note);
                         }}
                     >
-                        {workout._id}
+                        {note._id}
                     </ListGroup.Item>
                 ))}
             </ListGroup>

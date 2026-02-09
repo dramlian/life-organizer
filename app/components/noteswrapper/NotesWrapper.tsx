@@ -6,14 +6,14 @@ import RichTextEditor from "../richtexteditor/RichTextEditor";
 import Stopwatch from "../stopwatch/Stopwatch";
 import WorkoutSelector from "../workoutselector/WorkoutSelector";
 import { getWorkouts, updateWorkout, addWorkout, deleteWorkout } from "../../actions/workouts";
-import { WorkoutDbDto } from "../../interfaces/workouts";
+import { NotesDbDto } from "../../interfaces/notes";
 
 export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?: boolean }) {
 
     const [inputTextValue, setInputTextValue] = useState<string>("");
     const [html, setHtml] = useState<string>("");
-    const [notes, setnotes] = useState<WorkoutDbDto[]>([]);
-    const [selectedNote, setSelectedNote] = useState<WorkoutDbDto | null>(null);
+    const [notes, setnotes] = useState<NotesDbDto[]>([]);
+    const [selectedNote, setSelectedNote] = useState<NotesDbDto | null>(null);
 
     function manageAddNote(id: string) {
         if (!id.trim() || notes.map(w => w._id).includes(id)) return;
@@ -65,7 +65,7 @@ export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?
                         inputTextValue={inputTextValue}
                         setInputTextValue={setInputTextValue}
                         addNote={manageAddNote}
-                        workouts={notes}
+                        notes={notes}
                         setSelectedNote={setSelectedNote}
                         selectedNote={selectedNote}
                         deleteNote={manageDeleteNote}
