@@ -64,8 +64,8 @@ export default function TodoList({ injectedTodos, setTodos }: { injectedTodos: T
                     <InputGroup className="mb-3">
                         <InputGroup.Checkbox aria-label="Placeholder checkbox" style={{ visibility: 'hidden' }} disabled />
                         <Form.Control
-                            placeholder="Recipient's username"
-                            aria-label="Recipient's username"
+                            placeholder="Task name"
+                            aria-label="Task name"
                             aria-describedby="basic-addon2"
                             value={inputTextValue}
                             onChange={(e) => setInputTextValue(e.target.value)}
