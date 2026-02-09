@@ -31,6 +31,11 @@ export default function RichTextEditor({ initialHtml = "", onChange, hasBorder =
                                 ["bold", "italic", "underline"],
                                 ["fullScreen"],
                             ],
+                            height: "auto",
+                            minHeight: "300px",
+                            maxHeight: "800px",
+                            resizingBar: true,
+                            showPathLabel: false,
                         }}
                     />
                 </Col>
