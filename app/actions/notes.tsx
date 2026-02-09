@@ -4,40 +4,40 @@ import { NotesDbDto } from "../interfaces/notes";
 import { getDb } from "../lib/mongo";
 import { requireAuth } from "../lib/auth";
 
-export async function getWorkouts(): Promise<NotesDbDto[]> {
+export async function getNotes(collectionName: string): Promise<NotesDbDto[]> {
     await requireAuth();
 
     const db = await getDb();
     return db
-        .collection<NotesDbDto>("workouts")
+        .collection<NotesDbDto>(collectionName)
         .find()
         .toArray();
 }
 
-export async function addWorkout(content: string, id: string): Promise<void> {
+export async function addNote(content: string, id: string, collectionName: string): Promise<void> {
     await requireAuth();
 
     const db = await getDb();
     await db
-        .collection<NotesDbDto>("workouts")
+        .collection<NotesDbDto>(collectionName)
         .insertOne({ _id: id, content: content });
 }
 
-export async function deleteWorkout(id: string): Promise<void> {
+export async function deleteNote(id: string, collectionName: string): Promise<void> {
     await requireAuth();
 
     const db = await getDb();
     await db
-        .collection<NotesDbDto>("workouts")
+        .collection<NotesDbDto>(collectionName)
         .deleteOne({ _id: id });
 }
 
-export async function updateWorkout(id: string, content: string): Promise<void> {
+export async function updateNote(id: string, content: string, collectionName: string): Promise<void> {
     await requireAuth();
 
     const db = await getDb();
     await db
-        .collection<NotesDbDto>("workouts")
+        .collection<NotesDbDto>(collectionName)
         .updateOne(
             { _id: id },
             { $set: { content: content } }

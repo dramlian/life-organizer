@@ -5,7 +5,7 @@ import { Col, Row, Container } from "react-bootstrap";
 import RichTextEditor from "../richtexteditor/RichTextEditor";
 import Stopwatch from "../stopwatch/Stopwatch";
 import WorkoutSelector from "../workoutselector/WorkoutSelector";
-import { getWorkouts, updateWorkout, addWorkout, deleteWorkout } from "../../actions/workouts";
+import { getNotes, updateNote, addNote, deleteNote } from "../../actions/notes";
 import { NotesDbDto } from "../../interfaces/notes";
 
 export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?: boolean }) {
@@ -14,16 +14,17 @@ export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?
     const [html, setHtml] = useState<string>("");
     const [notes, setnotes] = useState<NotesDbDto[]>([]);
     const [selectedNote, setSelectedNote] = useState<NotesDbDto | null>(null);
+    const collectionName = isWorkoutPage ? "workouts" : "notes";
 
     function manageAddNote(id: string) {
         if (!id.trim() || notes.map(w => w._id).includes(id)) return;
         setInputTextValue("");
-        addWorkout("", id);
+        addNote("", id, collectionName);
         setnotes([...notes, { _id: id, content: "" }]);
     }
 
     function manageDeleteNote(id: string) {
-        deleteWorkout(id);
+        deleteNote(id, collectionName);
         const updatednotes = notes.filter(w => w._id !== id);
         setnotes(updatednotes);
         if (selectedNote?._id === id) {
@@ -33,7 +34,7 @@ export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?
 
     useEffect(() => {
         const fetchnotes = async () => {
-            const initialnotes = await getWorkouts();
+            const initialnotes = await getNotes(collectionName);
             setnotes(initialnotes);
             setSelectedNote(initialnotes[0] || null);
         };
@@ -48,7 +49,7 @@ export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?
 
     useEffect(() => {
         if (selectedNote) {
-            updateWorkout(selectedNote._id, html);
+            updateNote(selectedNote._id, html, collectionName);
             const updatednotes = notes.map(w =>
                 w._id === selectedNote._id ? { ...w, content: html } : w
             );
