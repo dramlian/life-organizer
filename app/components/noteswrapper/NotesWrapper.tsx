@@ -64,11 +64,12 @@ export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?
                     <WorkoutSelector
                         inputTextValue={inputTextValue}
                         setInputTextValue={setInputTextValue}
-                        addWorkout={manageAddNote}
+                        addNote={manageAddNote}
                         workouts={notes}
-                        setSelectedWorkout={setSelectedNote}
-                        selectedWorkout={selectedNote}
-                        deleteWorkout={manageDeleteNote}
+                        setSelectedNote={setSelectedNote}
+                        selectedNote={selectedNote}
+                        deleteNote={manageDeleteNote}
+                        isWorkout={isWorkoutPage}
                     />
                 </Col>
                 <Col className="pt-3 border rounded " style={{ height: '80vh', overflowY: 'scroll' }} >
