@@ -8,7 +8,7 @@ import WorkoutSelector from "../workoutselector/WorkoutSelector";
 import { getWorkouts, updateWorkout, addWorkout, deleteWorkout } from "../../actions/workouts";
 import { WorkoutDbDto } from "../../interfaces/workouts";
 
-export default function NotesWrapper() {
+export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?: boolean }) {
 
     const [inputTextValue, setInputTextValue] = useState<string>("");
     const [html, setHtml] = useState<string>("");
@@ -74,7 +74,7 @@ export default function NotesWrapper() {
                 </Col>
                 <Col className="pt-3 border rounded " style={{ height: '80vh', overflowY: 'scroll' }} >
                     <Row className="justify-content-center">
-                        <Stopwatch />
+                        {isWorkoutPage && <Stopwatch />}
                     </Row>
                     <Row className="justify-content-center">
                         <RichTextEditor initialHtml={html} onChange={setHtml} />
