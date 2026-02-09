@@ -1,4 +1,4 @@
-export interface WorkoutDbDto {
+export interface NotesDbDto {
     _id: string;
     content: string;
 }

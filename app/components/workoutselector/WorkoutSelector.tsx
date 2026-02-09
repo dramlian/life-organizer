@@ -1,52 +1,54 @@
 'use client';
 
 import { Row, ListGroup, InputGroup, Button, Form } from "react-bootstrap";
-import { WorkoutDbDto } from "../../interfaces/workouts";
+import { NotesDbDto } from "../../interfaces/notes";
 
-export default function WorkoutSelector({
+export default function NoteSelector({
     inputTextValue,
     setInputTextValue,
-    addWorkout,
-    workouts,
-    setSelectedWorkout,
-    selectedWorkout,
-    deleteWorkout
+    addNote,
+    notes,
+    setSelectedNote,
+    selectedNote,
+    deleteNote,
+    isWorkout = false
 }: {
     inputTextValue: string;
     setInputTextValue: (value: string) => void;
-    addWorkout: (id: string) => void;
-    workouts: WorkoutDbDto[];
-    setSelectedWorkout: (workout: WorkoutDbDto | null) => void;
-    selectedWorkout: WorkoutDbDto | null;
-    deleteWorkout: (id: string) => void;
+    addNote: (id: string) => void;
+    notes: NotesDbDto[];
+    setSelectedNote: (note: NotesDbDto | null) => void;
+    selectedNote: NotesDbDto | null;
+    deleteNote: (id: string) => void;
+    isWorkout?: boolean;
 }) {
     return (
         <Row>
             <InputGroup className="mb-3">
                 <InputGroup.Checkbox style={{ visibility: 'hidden' }} disabled />
                 <Form.Control
-                    placeholder="Workout name"
+                    placeholder={`${isWorkout ? "Workout" : "Note"} name`}
                     value={inputTextValue}
                     onChange={(e) => setInputTextValue(e.target.value)}
                 />
                 <Button
                     variant="outline-secondary"
-                    onClick={() => addWorkout(inputTextValue)}
+                    onClick={() => addNote(inputTextValue)}
                 >
-                    Add Workout
+                    Add {isWorkout ? "Workout" : "Note"}
                 </Button>
             </InputGroup>
             <ListGroup className="px-2">
-                {workouts.map((workout, index) => (
+                {notes.map((note, index) => (
                     <ListGroup.Item
                         key={index}
                         action
-                        active={selectedWorkout?._id === workout._id}
+                        active={selectedNote?._id === note._id}
                         onClick={() => {
-                            setSelectedWorkout(workout);
+                            setSelectedNote(note);
                         }}
                     >
-                        {workout._id}
+                        {note._id}
                     </ListGroup.Item>
                 ))}
             </ListGroup>
@@ -55,12 +57,12 @@ export default function WorkoutSelector({
                     variant="outline-danger"
                     className="w-100 fw-bold shadow-sm"
                     onClick={() => {
-                        if (selectedWorkout) {
-                            deleteWorkout(selectedWorkout._id);
+                        if (selectedNote) {
+                            deleteNote(selectedNote._id);
                         }
                     }}
                 >
-                    Delete Workout
+                    Delete {isWorkout ? "Workout" : "Note"}
                 </Button>
             </div>
         </Row>
