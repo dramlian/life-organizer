@@ -6,6 +6,7 @@ import InputGroup from "react-bootstrap/esm/InputGroup";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
 import { Col, Container, Row } from "react-bootstrap";
+import "./todolist.css";
 
 export default function TodoList({ injectedTodos, setTodos }: { injectedTodos: Todo[] | null, setTodos: React.Dispatch<React.SetStateAction<Todo[] | null>> }) {
 
