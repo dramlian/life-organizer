@@ -1,0 +1,6 @@
+.navbar-gradient {
+    background: linear-gradient(90deg,
+            #330000 0%,
+            #000000 50%,
+            #330000 100%);
+}

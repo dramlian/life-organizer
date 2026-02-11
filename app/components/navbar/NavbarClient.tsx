@@ -4,12 +4,13 @@ import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import "./nav.css";
 
 export default function NavbarClient() {
     const { data: session, status } = useSession();
 
     return (
-        <Navbar bg="dark" variant="dark" expand="lg" className="shadow-sm">
+        <Navbar variant="dark" expand="lg" fixed="top" className="shadow-sm navbar-gradient">
             <Container>
                 <Navbar.Brand as={Link} href="/" >
                     Life Organizer

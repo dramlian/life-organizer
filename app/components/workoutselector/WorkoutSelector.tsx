@@ -2,6 +2,7 @@
 
 import { Row, ListGroup, InputGroup, Button, Form } from "react-bootstrap";
 import { NotesDbDto } from "../../interfaces/notes";
+import "./workoutselector.css";
 
 export default function NoteSelector({
     inputTextValue,

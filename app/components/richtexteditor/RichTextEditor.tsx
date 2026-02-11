@@ -3,6 +3,7 @@
 import { Container, Col, Row } from "react-bootstrap";
 import dynamic from "next/dynamic";
 import "suneditor/dist/css/suneditor.min.css";
+import "./rte.css";
 
 const SunEditor = dynamic(() => import("suneditor-react"), { ssr: false });
 
@@ -26,7 +27,7 @@ export default function RichTextEditor({ initialHtml = "", onChange, hasBorder =
                         setContents={initialHtml}
                         onChange={handleChange}
                         setOptions={{
-                            defaultStyle: "font-family: Arial; font-size: 16px; color: #000000;",
+                            defaultStyle: "font-family: Arial; font-size: 16px; color: #ffffff; background-color: #212529;",
                             buttonList: [
                                 ["bold", "italic", "underline"],
                                 ["fullScreen"],

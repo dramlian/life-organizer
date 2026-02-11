@@ -1,0 +1,38 @@
+/* SunEditor dark mode overrides */
+.sun-editor {
+    border: none !important;
+}
+
+.sun-editor .se-wrapper {
+    border: none !important;
+}
+
+
+.sun-editor .se-toolbar {
+    background-color: #212529 !important;
+    outline: 1px solid #343a40;
+}
+
+.se-btn-module-border {
+    background-color: #212529 !important;
+    border: none !important;
+    outline: none !important;
+}
+
+.sun-editor .se-btn {
+    color: #dee2e6 !important;
+}
+
+.sun-editor .se-btn:hover {
+    background-color: #495057 !important;
+}
+
+
+.sun-editor .se-resizing-bar {
+    background-color: #343a40 !important;
+    border: none !important;
+}
+
+.se-resizing-bar {
+    display: none !important;
+}
