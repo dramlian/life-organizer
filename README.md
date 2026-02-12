@@ -42,3 +42,10 @@ A personal productivity application built with Next.js 14, featuring task manage
 - Rich text editor for workout details
 - Add, edit, and delete workout entries
 - View workout history
+
+#### Workouts (`/notes`)
+![Workouts Page](./public/screenshots/notes.png)
+
+- Note tracking and management
+- Rich text editor for note details
+- Add, edit, and delete note entries
