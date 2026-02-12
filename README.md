@@ -9,15 +9,15 @@ A personal productivity application built with Next.js 14, featuring task manage
 - **Database**: MongoDB
 - **UI**: React Bootstrap
 - **Language**: TypeScript
+- **Deployment**: Vercel free tier + Atlas
 
 
-### Pages
 
-#### Home (`/`)
+## Home (`/`)
 - Landing page showing welcome message for authenticated users
 - Displays access denied message for unauthenticated users
 
-#### Tasks (`/tasks`)
+## Tasks (`/tasks`)
 ![Tasks Page](./public/screenshots/tasks.png)
 
 - Daily task management system
@@ -25,7 +25,7 @@ A personal productivity application built with Next.js 14, featuring task manage
 - Create, update, and toggle task completion
 - Tasks persist per date in MongoDB
 
-#### Work Reports (`/workreports`)
+## Work Reports (`/workreports`)
 ![Work Reports Page](./public/screenshots/work-reports.png)
 
 - Daily work report editor
@@ -34,7 +34,7 @@ A personal productivity application built with Next.js 14, featuring task manage
 - Integrated Pomodoro timer for time management
 - Create and update reports for specific dates
 
-#### Workouts (`/workouts`)
+## Workouts (`/workouts`)
 ![Workouts Page](./public/screenshots/workouts.png)
 
 - Workout tracking and management
@@ -43,7 +43,7 @@ A personal productivity application built with Next.js 14, featuring task manage
 - Add, edit, and delete workout entries
 - View workout history
 
-#### Notes (`/notes`)
+## Notes (`/notes`)
 ![Workouts Page](./public/screenshots/notes.png)
 
 - Note tracking and management
