@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import RichTextEditor from "../richtexteditor/RichTextEditor";
 import Stopwatch from "../stopwatch/Stopwatch";
-import WorkoutSelector from "../workoutselector/WorkoutSelector";
+import NoteSelector from "../noteselector/NoteSelector";
 import { getNotes, updateNote, addNote, deleteNote } from "../../actions/notes";
 import { NotesDbDto } from "../../interfaces/notes";
 
@@ -62,7 +62,7 @@ export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?
         <Container>
             <Row className="mt-3 gap-3">
                 <Col md={3} className="pt-3 border rounded ">
-                    <WorkoutSelector
+                    <NoteSelector
                         inputTextValue={inputTextValue}
                         setInputTextValue={setInputTextValue}
                         addNote={manageAddNote}
