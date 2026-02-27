@@ -14,13 +14,13 @@ export async function getNotes(collectionName: string): Promise<NotesDbDto[]> {
         .toArray();
 }
 
-export async function addNote(content: string, id: string, collectionName: string): Promise<void> {
+export async function addNote(content: string, id: string, collectionName: string, folderName: string): Promise<void> {
     await requireAuth();
 
     const db = await getDb();
     await db
         .collection<NotesDbDto>(collectionName)
-        .insertOne({ _id: id, content: content });
+        .insertOne({ _id: id, content: content, folderName: folderName });
 }
 
 export async function deleteNote(id: string, collectionName: string): Promise<void> {
