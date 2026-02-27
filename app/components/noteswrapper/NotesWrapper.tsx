@@ -16,11 +16,11 @@ export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?
     const [selectedNote, setSelectedNote] = useState<NotesDbDto | null>(null);
     const collectionName = isWorkoutPage ? "workouts" : "notes";
 
-    function manageAddNote(id: string) {
+    function manageAddNote(id: string, folderName: string = "Default") {
         if (!id.trim() || notes.map(w => w._id).includes(id)) return;
         setInputTextValue("");
-        addNote("", id, collectionName);
-        setnotes([...notes, { _id: id, content: "" }]);
+        addNote("", id, collectionName, folderName);
+        setnotes([...notes, { _id: id, content: "", folderName: folderName }]);
     }
 
     function manageDeleteNote(id: string) {
@@ -36,7 +36,7 @@ export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?
         const fetchnotes = async () => {
             const initialnotes = await getNotes(collectionName);
             setnotes(initialnotes);
-            setSelectedNote(initialnotes[0] || null);
+            setSelectedNote(null);
         };
         fetchnotes();
     }, []);
