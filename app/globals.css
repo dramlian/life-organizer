@@ -4,6 +4,7 @@ html,
 body {
   height: 100%;
   overflow-x: hidden;
+  font-size: 9px !important;
 }
 
 body {
@@ -12,4 +13,18 @@ body {
   width: 100%;
   max-width: 100vw;
   padding-top: 56px;
+  background-color: #000000 !important;
+  font-family: var(--font-press-start) !important;
+}
+
+
+[data-bs-theme="dark"] {
+  --bs-body-bg: #000000;
+  --bs-body-bg-rgb: 0, 0, 0;
+  --bs-secondary-bg: #000000;
+  --bs-secondary-bg-rgb: 0, 0, 0;
+  --bs-tertiary-bg: #000000;
+  --bs-tertiary-bg-rgb: 0, 0, 0;
+  --bs-body-font-family: var(--font-press-start);
+  --bs-font-sans-serif: var(--font-press-start);
 }

@@ -27,7 +27,7 @@ export default function RichTextEditor({ initialHtml = "", onChange, hasBorder =
                         setContents={initialHtml}
                         onChange={handleChange}
                         setOptions={{
-                            defaultStyle: "font-family: Arial; font-size: 16px; color: #ffffff; background-color: #212529;",
+                            defaultStyle: "font-family: Arial; font-size: 16px; color: #ffffff; background-color: #000000;",
                             buttonList: [
                                 ["bold", "italic", "underline"],
                                 ["fullScreen"],

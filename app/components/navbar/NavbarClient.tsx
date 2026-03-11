@@ -10,7 +10,7 @@ export default function NavbarClient() {
     const { data: session, status } = useSession();
 
     return (
-        <Navbar variant="dark" expand="lg" fixed="top" className="shadow-sm navbar-gradient">
+        <Navbar variant="dark" expand="lg" fixed="top" className="shadow-sm navbar-dark-styled">
             <Container>
                 <Navbar.Brand as={Link} href="/" >
                     Life Organizer

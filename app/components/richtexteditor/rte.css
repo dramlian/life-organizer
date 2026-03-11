@@ -9,12 +9,12 @@
 
 
 .sun-editor .se-toolbar {
-    background-color: #212529 !important;
-    outline: 1px solid #343a40;
+    background-color: #000000 !important;
+    outline: 1px solid #000000;
 }
 
 .se-btn-module-border {
-    background-color: #212529 !important;
+    background-color: #000000 !important;
     border: none !important;
     outline: none !important;
 }
@@ -24,7 +24,7 @@
 }
 
 .sun-editor .se-btn:hover {
-    background-color: #495057 !important;
+    background-color: #16181a !important;
 }
 
 
