@@ -51,7 +51,7 @@ export default function Stopwatch() {
     return (
         <Row>
             <Col className='text-center m-3 border rounded p-3'>
-                <div className="display-1 mb-4 font-monospace">
+                <div className="display-1 mb-4" style={{ fontFamily: 'var(--font-press-start)' }}>
                     <span>{String(hours).padStart(2, '0')}</span>:
                     <span>{String(minutes).padStart(2, '0')}</span>:
                     <span>{String(seconds).padStart(2, '0')}</span>

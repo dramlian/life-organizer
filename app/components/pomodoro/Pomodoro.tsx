@@ -74,7 +74,7 @@ export default function Pomodoro() {
 
             <Row>
                 <Col className={`text-center m-3 border rounded p-3 bg-${bgColor} bg-opacity-10`}>
-                    <div className="display-1 mb-4 font-monospace">
+                    <div className="display-1 mb-4" style={{ fontFamily: 'var(--font-press-start)' }}>
                         <span>{String(minutes).padStart(2, '0')}</span>:
                         <span>{String(seconds).padStart(2, '0')}</span>
                     </div>

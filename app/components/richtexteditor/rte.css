@@ -3,6 +3,11 @@
     border: none !important;
 }
 
+.sun-editor .se-wrapper .se-wrapper-inner {
+    font-family: var(--font-press-start) !important;
+    font-size: 10px !important;
+}
+
 .sun-editor .se-wrapper {
     border: none !important;
 }
