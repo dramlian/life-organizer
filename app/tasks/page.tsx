@@ -6,6 +6,7 @@ import { Todo } from "../interfaces/todo";
 import DaySelector from "../components/dayselector/DaySelector";
 import { useEffect, useState } from "react";
 import { getTasksByDate, updateTasksForDate, createDefaultTasksForDate } from "../actions/tasks";
+import LoadingSpinner from "../components/loading/LoadingSpinner";
 
 export default function Tasks() {
     const today = new Date().toISOString().split('T')[0];
@@ -44,7 +45,7 @@ export default function Tasks() {
             </Row>
             <Row className="g-0">
                 <Col md={12}>
-                    <TodoList injectedTodos={todos} setTodos={setTodos} />
+                    {todos === null ? <LoadingSpinner /> : <TodoList injectedTodos={todos} setTodos={setTodos} />}
                 </Col>
             </Row>
         </Container>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Col, Row, Container } from "react-bootstrap";
+import LoadingSpinner from "../loading/LoadingSpinner";
 import RichTextEditor from "../richtexteditor/RichTextEditor";
 import Stopwatch from "../stopwatch/Stopwatch";
 import NoteSelector from "../noteselector/NoteSelector";
@@ -14,6 +15,7 @@ export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?
     const [html, setHtml] = useState<string>("");
     const [notes, setnotes] = useState<NotesDbDto[]>([]);
     const [selectedNote, setSelectedNote] = useState<NotesDbDto | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
     const collectionName = isWorkoutPage ? "workouts" : "notes";
 
     function manageAddNote(id: string, folderName: string = "Default") {
@@ -34,9 +36,11 @@ export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?
 
     useEffect(() => {
         const fetchnotes = async () => {
+            setIsLoading(true);
             const initialnotes = await getNotes(collectionName);
             setnotes(initialnotes);
             setSelectedNote(null);
+            setIsLoading(false);
         };
         fetchnotes();
     }, []);
@@ -57,6 +61,8 @@ export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?
         }
 
     }, [html]);
+
+    if (isLoading) return <LoadingSpinner />;
 
     return (
         <Container>
