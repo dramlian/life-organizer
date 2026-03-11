@@ -44,7 +44,7 @@ export default function NavbarClient() {
                                         alt={session.user.name || "User"}
                                         width={32}
                                         height={32}
-                                        className="rounded-circle"
+                                        className="avatar-pixel"
                                     />
                                 )}
                                 <span className="text-light">
