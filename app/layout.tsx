@@ -15,6 +15,9 @@ const pressStart2P = Press_Start_2P({
 export const metadata: Metadata = {
   title: "Life Organizer",
   description: "Life Organizer next app",
+  icons: {
+    icon: '/sword-svgrepo-com.svg',
+  },
 };
 
 export default function RootLayout({
