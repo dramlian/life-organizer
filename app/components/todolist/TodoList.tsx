@@ -11,6 +11,8 @@ import "./todolist.css";
 export default function TodoList({ injectedTodos, setTodos }: { injectedTodos: Todo[] | null, setTodos: React.Dispatch<React.SetStateAction<Todo[] | null>> }) {
 
     const [inputTextValue, setInputTextValue] = useState<string>("");
+    const [editingId, setEditingId] = useState<number | null>(null);
+    const [editingValue, setEditingValue] = useState<string>("");
 
     useEffect(() => {
         setTodos(injectedTodos);
@@ -89,7 +91,18 @@ export default function TodoList({ injectedTodos, setTodos }: { injectedTodos: T
                                 <InputGroup className="mb-3">
                                     <InputGroup.Checkbox aria-label="Checkbox for following text input" checked={todo.done} onChange={(e) => markTodo(todo.id)} />
 
-                                    <Form.Control aria-label="Text input with checkbox" readOnly={todo.done} value={todo.content} onChange={(e) => editTodo(todo.id, e.target.value)} style={todo.done ? { textDecoration: 'line-through' } : {}} />
+                                    <Form.Control
+                                        aria-label="Text input with checkbox"
+                                        readOnly={todo.done || editingId !== todo.id}
+                                        value={editingId === todo.id ? editingValue : todo.content}
+                                        onChange={(e) => setEditingValue(e.target.value)}
+                                        style={todo.done ? { textDecoration: 'line-through' } : {}}
+                                    />
+                                    {!todo.done && (
+                                        editingId === todo.id
+                                            ? <Button variant="outline-success" onClick={() => { editTodo(todo.id, editingValue); setEditingId(null); }}>Save</Button>
+                                            : <Button variant="outline-secondary" onClick={() => { setEditingId(todo.id); setEditingValue(todo.content); }}>Edit</Button>
+                                    )}
                                     <Button variant="outline-danger" onClick={() => deleteTodo(todo.id)}>Delete</Button>
                                 </InputGroup>
                             </li>
