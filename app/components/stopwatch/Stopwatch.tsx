@@ -48,6 +48,13 @@ export default function Stopwatch() {
 
     const ms = Math.floor((milliseconds % 1000) / 10);
 
+    useEffect(() => {
+        document.title = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        return () => {
+            document.title = 'Life Organizer';
+        };
+    }, [hours, minutes, seconds]);
+
     return (
         <Row>
             <Col className='text-center m-3 border rounded p-3'>
