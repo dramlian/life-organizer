@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import TodoList from "../components/todolist/TodoList";
 import { Todo } from "../interfaces/todo";
 import DaySelector from "../components/dayselector/DaySelector";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getTasksByDate, updateTasksForDate, createDefaultTasksForDate } from "../actions/tasks";
 import LoadingSpinner from "../components/loading/LoadingSpinner";
 
@@ -12,18 +12,21 @@ export default function Tasks() {
     const today = new Date().toISOString().split('T')[0];
     const [selectedDate, setSelectedDate] = useState<string>(today);
     const [todos, setTodos] = useState<Todo[] | null>(null);
+    const isLoadingRef = useRef(false);
 
     useEffect(() => {
         const fetchTasks = async () => {
-            const todos = await getTasksByDate(selectedDate);
-            if (todos.length === 0) {
+            isLoadingRef.current = true;
+            setTodos(null);
+            const fetched = await getTasksByDate(selectedDate);
+            if (fetched.length === 0) {
                 await createDefaultTasksForDate(selectedDate);
                 const defaultTodos = await getTasksByDate(selectedDate);
                 setTodos(defaultTodos);
-                return;
             } else {
-                setTodos(todos);
+                setTodos(fetched);
             }
+            isLoadingRef.current = false;
         };
 
         fetchTasks();
@@ -31,7 +34,7 @@ export default function Tasks() {
 
 
     useEffect(() => {
-        if (todos !== null) {
+        if (todos !== null && !isLoadingRef.current) {
             updateTasksForDate(selectedDate, todos);
         }
     }, [todos]);

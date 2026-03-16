@@ -24,7 +24,7 @@ export default function TodoList({ injectedTodos, setTodos }: { injectedTodos: T
     function addTodo(content: string) {
         if (injectedTodos === null) return;
         const newTodo: Todo = {
-            id: injectedTodos.length + 1,
+            id: Date.now(),
             content,
             done: false,
         };
