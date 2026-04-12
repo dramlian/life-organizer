@@ -12,14 +12,6 @@ export default function Payments() {
     const [selectedDate, setSelectedDate] = useState<string>(today);
     const [payments, setPayments] = useState<Payment[] | null>(null);
 
-    const togglePayment = (id: number) => {
-        setPayments(prev => prev?.map(p => p.id === id ? { ...p, done: !p.done } : p) ?? null);
-    };
-
-    const deletePayment = (id: number) => {
-        setPayments(prev => prev?.filter(p => p.id !== id) ?? null);
-    };
-
     useEffect(() => {
         setPayments([
             { id: 1, content: "Rent", done: false },
@@ -30,6 +22,18 @@ export default function Payments() {
         ]);
     }, []);
 
+    const togglePayment = (id: number) => {
+        setPayments(prev => prev?.map(p => p.id === id ? { ...p, done: !p.done } : p) ?? null);
+    };
+
+    const deletePayment = (id: number) => {
+        setPayments(prev => prev?.filter(p => p.id !== id) ?? null);
+    };
+
+    const addPayment = (content: string) => {
+        setPayments(prev => [...(prev ?? []), { id: Date.now(), content, done: false }]);
+    };
+
     return (
         <Container fluid className="h-100 p-0" style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
             <Row className="g-0">
@@ -39,7 +43,7 @@ export default function Payments() {
             </Row>
             <Row className="g-0">
                 <Col md={12}>
-                    {payments === null ? <LoadingSpinner /> : <PaymentList payments={payments} onToggle={togglePayment} onDelete={deletePayment} />}
+                    {payments === null ? <LoadingSpinner /> : <PaymentList payments={payments} onToggle={togglePayment} onDelete={deletePayment} onAdd={addPayment} />}
                 </Col>
             </Row>
         </Container>

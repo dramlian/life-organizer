@@ -5,10 +5,35 @@ import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
 import { Col, Container, Row } from "react-bootstrap";
 import { Payment } from "../../interfaces/payments"
+import { useState } from "react";
 
-export default function PaymentList({ payments, onToggle, onDelete }: { payments: Payment[], onToggle: (id: number) => void, onDelete: (id: number) => void }) {
+export default function PaymentList({ payments, onToggle, onDelete, onAdd }: { payments: Payment[], onToggle: (id: number) => void, onDelete: (id: number) => void, onAdd: (content: string) => void }) {
+    const [newItem, setNewItem] = useState<string>("");
+
+    const handleAdd = () => {
+        const trimmed = newItem.trim();
+        if (!trimmed) return;
+        onAdd(trimmed);
+        setNewItem("");
+    };
+
     return (
         <Container>
+            <Row className="mt-3">
+                <Col>
+                    <InputGroup className="mb-3">
+                        <Form.Control
+                            placeholder="New payment item"
+                            value={newItem}
+                            onChange={e => setNewItem(e.target.value)}
+                            onKeyDown={e => e.key === "Enter" && handleAdd()}
+                        />
+                        <Button variant="outline-secondary" onClick={handleAdd}>
+                            Add
+                        </Button>
+                    </InputGroup>
+                </Col>
+            </Row>
             <Row>
                 <Col>
                     <ul style={{ padding: 0, listStyle: 'none' }}>
