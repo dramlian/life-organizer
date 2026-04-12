@@ -18,6 +18,7 @@ const defaultTasks: Todo[] = [
     { id: 4, content: "Citat", done: false },
     { id: 5, content: "Cvicit/Pohyb", done: false },
     { id: 6, content: "Dotnet", done: false },
+    { id: 7, content: "CV", done: false }
 ];
 
 const sampleReport: string = `<b>Yesterday's Catch Up</b><p>- </p><b>Todo for Today</b><p>- </p>`;
