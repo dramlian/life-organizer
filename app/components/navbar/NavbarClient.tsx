@@ -4,13 +4,13 @@ import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import "./nav.css";
+import styles from "./nav.module.css";
 
 export default function NavbarClient() {
     const { data: session, status } = useSession();
 
     return (
-        <Navbar variant="dark" expand="lg" fixed="top" className="shadow-sm navbar-dark-styled">
+        <Navbar variant="dark" expand="lg" fixed="top" className={`shadow-sm ${styles['navbar-dark-styled']}`}>
             <Container>
                 <Navbar.Brand as={Link} href="/" >
                     Life Organizer
@@ -30,6 +30,9 @@ export default function NavbarClient() {
                         <Nav.Link as={Link} href="/notes" className="mx-2">
                             Notes
                         </Nav.Link>
+                        <Nav.Link as={Link} href="/payments" className="mx-2">
+                            Payments
+                        </Nav.Link>
                     </Nav>
                     <Nav className="align-items-center">
                         {status === "loading" ? (
@@ -44,7 +47,7 @@ export default function NavbarClient() {
                                         alt={session.user.name || "User"}
                                         width={32}
                                         height={32}
-                                        className="avatar-pixel"
+                                        className={styles['avatar-pixel']}
                                     />
                                 )}
                                 <span className="text-light">
