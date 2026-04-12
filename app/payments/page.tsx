@@ -16,6 +16,10 @@ export default function Payments() {
         setPayments(prev => prev?.map(p => p.id === id ? { ...p, done: !p.done } : p) ?? null);
     };
 
+    const deletePayment = (id: number) => {
+        setPayments(prev => prev?.filter(p => p.id !== id) ?? null);
+    };
+
     useEffect(() => {
         setPayments([
             { id: 1, content: "Rent", done: false },
@@ -35,7 +39,7 @@ export default function Payments() {
             </Row>
             <Row className="g-0">
                 <Col md={12}>
-                    {payments === null ? <LoadingSpinner /> : <PaymentList payments={payments} onToggle={togglePayment} />}
+                    {payments === null ? <LoadingSpinner /> : <PaymentList payments={payments} onToggle={togglePayment} onDelete={deletePayment} />}
                 </Col>
             </Row>
         </Container>

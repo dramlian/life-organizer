@@ -6,7 +6,7 @@ import Form from "react-bootstrap/esm/Form";
 import { Col, Container, Row } from "react-bootstrap";
 import { Payment } from "../../interfaces/payments"
 
-export default function PaymentList({ payments, onToggle }: { payments: Payment[], onToggle: (id: number) => void }) {
+export default function PaymentList({ payments, onToggle, onDelete }: { payments: Payment[], onToggle: (id: number) => void, onDelete: (id: number) => void }) {
     return (
         <Container>
             <Row>
@@ -18,13 +18,19 @@ export default function PaymentList({ payments, onToggle }: { payments: Payment[
                                     <Form.Control
                                         readOnly
                                         value={payment.content}
-                                        className={payment.done ? "border-success" : "border-danger"}
+                                        className={payment.done ? "border-success" : "border-warning"}
                                     />
                                     <Button
-                                        variant={payment.done ? "outline-success" : "outline-danger"}
+                                        variant={payment.done ? "outline-success" : "outline-warning"}
                                         onClick={() => onToggle(payment.id)}
                                     >
                                         {payment.done ? "Mark as not payed" : "Mark as payed"}
+                                    </Button>
+                                    <Button
+                                        variant="outline-danger"
+                                        onClick={() => onDelete(payment.id)}
+                                    >
+                                        Delete
                                     </Button>
                                 </InputGroup>
                             </li>
