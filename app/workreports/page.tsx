@@ -3,7 +3,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import DaySelector from "../components/dayselector/DaySelector";
 import { useEffect, useState } from "react";
-import RichTextEditor from "../components/richtexteditor/RichTextEditor";
+import MarkdownEditor from "../components/markdowneditor/MarkdownEditor";
 import LoadingSpinner from "../components/loading/LoadingSpinner";
 import { getReportByDate, updateReportForDate, createDefaultReportForDate } from "../actions/reports";
 import Pomodoro from "../components/pomodoro/Pomodoro";
@@ -11,7 +11,7 @@ import Pomodoro from "../components/pomodoro/Pomodoro";
 export default function WorkReports() {
     const today = new Date().toISOString().split('T')[0];
     const [selectedDate, setSelectedDate] = useState<string>(today);
-    const [html, setHtml] = useState<string>("");
+    const [markdown, setMarkdown] = useState<string>("");
     const [isLoading, setIsLoading] = useState(true);
 
 
@@ -22,9 +22,9 @@ export default function WorkReports() {
             if (report === null) {
                 await createDefaultReportForDate(selectedDate);
                 const defaultReport = await getReportByDate(selectedDate);
-                setHtml(defaultReport ?? `<h2>Work Report for ${selectedDate}</h2><p>No report available.</p>`);
+                setMarkdown(defaultReport ?? `## Work Report for ${selectedDate}\n\nNo report available.`);
             } else {
-                setHtml(report);
+                setMarkdown(report);
             }
             setIsLoading(false);
         };
@@ -34,9 +34,9 @@ export default function WorkReports() {
 
 
     useEffect(() => {
-        if (html === "") return;
-        updateReportForDate(selectedDate, html);
-    }, [html]);
+        if (markdown === "") return;
+        updateReportForDate(selectedDate, markdown);
+    }, [markdown]);
 
     return (
         <Container fluid className="h-100 p-0" style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
@@ -47,7 +47,7 @@ export default function WorkReports() {
             </Row>
             <Row>
                 <Col md={12} >
-                    {isLoading ? <LoadingSpinner /> : <RichTextEditor initialHtml={html} onChange={setHtml} hasBorder={true} />}
+                    {isLoading ? <LoadingSpinner /> : <MarkdownEditor value={markdown} onChange={setMarkdown} hasBorder={true} />}
                 </Col>
             </Row>
             <Row>

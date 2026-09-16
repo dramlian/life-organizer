@@ -21,6 +21,6 @@ const defaultTasks: Todo[] = [
     { id: 7, content: "CV", done: false }
 ];
 
-const sampleReport: string = `<b>Yesterday's Catch Up</b><p>- </p><b>Todo for Today</b><p>- </p>`;
+const sampleReport: string = `## Yesterday's Catch Up\n\n- \n\n## Todo for Today\n\n- \n`;
 
 export { defaultTasks, defaultPayments, sampleReport };

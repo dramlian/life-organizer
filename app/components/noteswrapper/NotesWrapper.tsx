@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import LoadingSpinner from "../loading/LoadingSpinner";
-import RichTextEditor from "../richtexteditor/RichTextEditor";
+import MarkdownEditor from "../markdowneditor/MarkdownEditor";
 import Stopwatch from "../stopwatch/Stopwatch";
 import NoteSelector from "../noteselector/NoteSelector";
 import { getNotes, updateNote, addNote, deleteNote } from "../../actions/notes";
@@ -12,7 +12,7 @@ import { NotesDbDto } from "../../interfaces/notes";
 export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?: boolean }) {
 
     const [inputTextValue, setInputTextValue] = useState<string>("");
-    const [html, setHtml] = useState<string>("");
+    const [markdown, setMarkdown] = useState<string>("");
     const [notes, setnotes] = useState<NotesDbDto[]>([]);
     const [selectedNote, setSelectedNote] = useState<NotesDbDto | null>(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -47,20 +47,20 @@ export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?
 
     useEffect(() => {
         if (selectedNote) {
-            setHtml(selectedNote.content);
+            setMarkdown(selectedNote.content);
         }
     }, [selectedNote]);
 
     useEffect(() => {
         if (selectedNote) {
-            updateNote(selectedNote._id, html, collectionName);
+            updateNote(selectedNote._id, markdown, collectionName);
             const updatednotes = notes.map(w =>
-                w._id === selectedNote._id ? { ...w, content: html } : w
+                w._id === selectedNote._id ? { ...w, content: markdown } : w
             );
             setnotes(updatednotes);
         }
 
-    }, [html]);
+    }, [markdown]);
 
     if (isLoading) return <LoadingSpinner />;
 
@@ -84,7 +84,7 @@ export default function NotesWrapper({ isWorkoutPage = false }: { isWorkoutPage?
                         {isWorkoutPage && <Stopwatch />}
                     </Row>
                     <Row className="justify-content-center">
-                        <RichTextEditor initialHtml={html} onChange={setHtml} />
+                        <MarkdownEditor value={markdown} onChange={setMarkdown} />
                     </Row>
                 </Col>
             </Row>
