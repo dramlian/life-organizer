@@ -17,8 +17,10 @@ const defaultTasks: Todo[] = [
     { id: 3, content: "Duolingo", done: false },
     { id: 4, content: "Citat", done: false },
     { id: 5, content: "Cvicit/Pohyb", done: false },
-    { id: 6, content: "Dotnet", done: false },
-    { id: 7, content: "CV", done: false }
+    { id: 6, content: "SideHustling", done: false },
+    { id: 7, content: "CV", done: false },
+    { id: 8, content: "Meditation", done: false },
+    { id: 9, content: "Vitaminy", done: false }
 ];
 
 const sampleReport: string = `## Yesterday's Catch Up\n\n- \n\n## Todo for Today\n\n- \n`;
