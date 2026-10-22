@@ -22,7 +22,7 @@ const defaultTasks: Todo[] = [
     { id: 8, content: "Meditation", done: false },
     { id: 9, content: "Vitaminy", done: false },
     { id: 10, content: "Maciatka vonku jedlo", done: false },
-    { id: 11, content: "PNX/Medrio calendar, master control", done: false },
+    { id: 11, content: "PNX/Medrio calendar, master control, mail", done: false },
     { id: 12, content: "Bobko rano ventolin a kavpky", done: false }
 ];
 
